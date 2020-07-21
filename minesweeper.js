@@ -1,4 +1,30 @@
 document.addEventListener('DOMContentLoaded', startGame)
+document.addEventListener('DOMContentLoaded', setAudioVar)
+
+function setAudioVar(){
+  var gamestart = document.getElementById("gamestart");
+  gamestart.loop = false;
+
+  var coin = document.getElementById("coin");
+  coin.loop = false;
+
+  var mark = document.getElementById("mark");
+  mark.loop = false;
+
+  var win = document.getElementById("win");
+  win.loop = false;
+
+  var bomb = document.getElementById("bomb");
+  bomb.loop = false;
+
+  var gameover = document.getElementById("gameover");
+  gameover.loop = false;
+
+  bomb.addEventListener('ended', function(){
+    gameover.play();
+  });
+}
+
 
 var board = { }
   /*cells: [
@@ -14,17 +40,7 @@ var board = { }
   ]
 }*/
 
-// AUDIO STUFF
-/*var gamestart = document.getElementById("gamestart");
-  gamestart.play();*/
-
-
-
-
 function createBoard () {
-  // assign property cells which has a value of an array to board object
-  // add an object to the cells array, with properties of row, col, ismine, isMarked and hidden
-  // do this x (4,9,16) times
   board.cells = []
 
   for (var i = 0; i < 3; i++) {
@@ -37,19 +53,18 @@ function createBoard () {
     board.cells.push({row: 2, col: (i), isMine: (Math.random() < 0.5), isMarked: false, hidden: true})
     } 
 
+    for (var i = 0; i < board.cells.length; i++) {
+      board.cells[i].surroundingMines = countSurroundingMines(board.cells[i])
+    }
 }
 
 function startGame () {
   document.addEventListener('click', checkForWin);
   document.addEventListener('contextmenu', checkForWin);
-
-
+  document.getElementById("reset").addEventListener("click", resetBoard); 
 
   createBoard()
 
-  for (var i = 0; i < board.cells.length; i++) {
-    board.cells[i].surroundingMines = countSurroundingMines(board.cells[i])
-  }
   // Don't remove this function call: it makes the game work!
   lib.initBoard()
 }
@@ -59,8 +74,6 @@ function startGame () {
 // 1. Are all of the cells that are NOT mines visible?
 // 2. Are all of the mines marked?
 function checkForWin () {
-  var win = document.getElementById("win");
-  win.loop = false;
   if (board.cells.every((cell) => (cell.isMine == false && cell.hidden == false) || (cell.isMine == true && cell.isMarked == true))) {
     win.play()
     lib.displayMessage('You win!');
@@ -88,3 +101,24 @@ function countSurroundingMines (cell) {
   return count
 }
 
+function resetBoard() {
+  document.getElementsByClassName("board")[0].remove();
+  newBoard = document.createElement("div")
+  newBoard.className = 'board'
+  document.getElementsByTagName('body')[0].insertBefore(newBoard, document.getElementById('reset'))
+
+  board = {}
+  
+  createBoard()
+
+  lib.initBoard()
+
+  gameover.pause()
+  gameover.currentTime = 0;
+
+  gamestart.play()
+
+
+
+  console.log("reset!")
+}
