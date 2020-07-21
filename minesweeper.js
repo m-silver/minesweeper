@@ -14,6 +14,13 @@ var board = { }
   ]
 }*/
 
+// AUDIO STUFF
+/*var gamestart = document.getElementById("gamestart");
+  gamestart.play();*/
+
+
+
+
 function createBoard () {
   // assign property cells which has a value of an array to board object
   // add an object to the cells array, with properties of row, col, ismine, isMarked and hidden
@@ -32,15 +39,11 @@ function createBoard () {
 
 }
 
-
-
-
-
-
-
 function startGame () {
   document.addEventListener('click', checkForWin);
   document.addEventListener('contextmenu', checkForWin);
+
+
 
   createBoard()
 
@@ -56,8 +59,10 @@ function startGame () {
 // 1. Are all of the cells that are NOT mines visible?
 // 2. Are all of the mines marked?
 function checkForWin () {
-  
+  var win = document.getElementById("win");
+  win.loop = false;
   if (board.cells.every((cell) => (cell.isMine == false && cell.hidden == false) || (cell.isMine == true && cell.isMarked == true))) {
+    win.play()
     lib.displayMessage('You win!');
     }
   }
