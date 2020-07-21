@@ -3,44 +3,46 @@
   <head>
     <title>Minesweeper</title>
     <link rel="stylesheet" href="minesweeper.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <script src="lib/tests.js"></script>
     <script src="lib/lib.js"></script>
     <script src="minesweeper.js"></script>
   </head>
+  
   <body>
+    <div id="header">Minesweeper</div>
     <div id="message"></div>
     <div id="notes"></div>
     <div class="board"></div>
 
     <!-- BUTTONS -->
 
-    <button id="reset" type="button">Reset</button>
-
+    <button id="reset">&lt; push to reset &gt;</button>
 
     <!-- AUDIO -->
 
-    <audio id="gamestart" loop= "false" volume = "60">
-      <source src="sounds/gamestart.wav" id="A" type="audio/wav">
+    <audio id="gamestart">
+      <source src="sounds/gamestart.wav" loop=false type="audio/wav">
     </audio>
     
-    <audio id="coin" loop= "false" volume = "60">
-      <source src="sounds/coin.wav" id="A" type="audio/wav">
+    <audio id="coin">
+      <source src="sounds/coin.wav" loop=false type="audio/wav">
     </audio>
 
-    <audio id="mark" loop= "false" volume = "60">
-      <source src="sounds/mark.wav" id="A" type="audio/wav">
+    <audio id="mark">
+      <source src="sounds/mark.wav" loop=false type="audio/wav">
     </audio>
 
-    <audio id="bomb" loop= "false" volume = "60">
-      <source src="sounds/bomb.wav" id="A" type="audio/wav">
+    <audio id="bomb">
+      <source src="sounds/bomb.wav" loop=false type="audio/wav">
     </audio>
 
-    <audio id="gameover" loop= "false" volume = "60">
-      <source src="sounds/gameover.wav" id="A" type="audio/wav">
+    <audio id="gameover">
+      <source src="sounds/gameover.wav" loop=false type="audio/wav">
     </audio>
 
-    <audio id="win" loop= "false" volume = "60">
-      <source src="sounds/win.wav" id="A" type="audio/wav">
+    <audio id="win">
+      <source src="sounds/win.wav" loop=false type="audio/wav">
     </audio>
 
   </body>

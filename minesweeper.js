@@ -4,53 +4,53 @@ document.addEventListener('DOMContentLoaded', setAudioVar)
 function setAudioVar(){
   var gamestart = document.getElementById("gamestart");
   gamestart.loop = false;
-
   var coin = document.getElementById("coin");
   coin.loop = false;
-
   var mark = document.getElementById("mark");
   mark.loop = false;
-
   var win = document.getElementById("win");
   win.loop = false;
-
   var bomb = document.getElementById("bomb");
   bomb.loop = false;
-
   var gameover = document.getElementById("gameover");
   gameover.loop = false;
-
   bomb.addEventListener('ended', function(){
     gameover.play();
   });
 }
 
+function stopAudio() {
+  gamestart.pause()
+  gamestart.currentTime = 0;
+  coin.pause()
+  coin.currentTime = 0;
+  mark.pause()
+  mark.currentTime = 0;
+  win.pause()
+  win.currentTime = 0;
+  bomb.pause()
+  bomb.currentTime = 0;
+  gameover.pause()
+  gameover.currentTime = 0;
+}
+
 
 var board = { }
-  /*cells: [
-    {row: 0, col: 0, isMine: (Math.random() < 0.5), isMarked: true, hidden: true}, 
-    {row: 0, col: 1, isMine: (Math.random() < 0.5), isMarked: true, hidden: true}, 
-    {row: 0, col: 2, isMine: (Math.random() < 0.5), isMarked: true, hidden: true}, 
-    {row: 1, col: 0, isMine: (Math.random() < 0.5), isMarked: true, hidden: true},
-    {row: 1, col: 1, isMine: (Math.random() < 0.5), isMarked: true, hidden: true}, 
-    {row: 1, col: 2, isMine: (Math.random() < 0.5), isMarked: true, hidden: true}, 
-    {row: 2, col: 0, isMine: (Math.random() < 0.5), isMarked: true, hidden: true}, 
-    {row: 2, col: 1, isMine: (Math.random() < 0.5), isMarked: true, hidden: true},
-    {row: 2, col: 2, isMine: (Math.random() < 0.5), isMarked: true, hidden: true}
-  ]
-}*/
 
 function createBoard () {
   board.cells = []
 
-  for (var i = 0; i < 3; i++) {
+  for (var i = 0; i < 4; i++) {
     board.cells.push({row: 0, col: (i), isMine: (Math.random() < 0.5), isMarked: false, hidden: true})
     } 
-  for (var i = 0; i < 3; i++) {
+  for (var i = 0; i < 4; i++) {
     board.cells.push({row: 1, col: (i), isMine: (Math.random() < 0.5), isMarked: false, hidden: true})
     } 
-  for (var i = 0; i < 3; i++) {
+  for (var i = 0; i < 4; i++) {
     board.cells.push({row: 2, col: (i), isMine: (Math.random() < 0.5), isMarked: false, hidden: true})
+    } 
+  for (var i = 0; i < 4; i++) {
+    board.cells.push({row: 3, col: (i), isMine: (Math.random() < 0.5), isMarked: false, hidden: true})
     } 
 
     for (var i = 0; i < board.cells.length; i++) {
@@ -79,7 +79,6 @@ function checkForWin () {
     lib.displayMessage('You win!');
     }
   }
-
 // Define this function to count the number of mines around the cell
 // (there could be as many as 8). You don't have to get the surrounding
 // cells yourself! Just use `lib.getSurroundingCells`: 
@@ -113,12 +112,6 @@ function resetBoard() {
 
   lib.initBoard()
 
-  gameover.pause()
-  gameover.currentTime = 0;
-
+  stopAudio()
   gamestart.play()
-
-
-
-  console.log("reset!")
 }
