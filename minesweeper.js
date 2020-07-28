@@ -34,29 +34,43 @@ function stopAudio() {
   gameover.currentTime = 0;
 }
 
-
 var board = { }
+
+// function createBoard () {
+//   board.cells = []
+
+//   for (var i = 0; i < 4; i++) {
+//     board.cells.push({row: 0, col: (i), isMine: (Math.random() < 0.3), isMarked: false, hidden: true})
+//     } 
+//   for (var i = 0; i < 4; i++) {
+//     board.cells.push({row: 1, col: (i), isMine: (Math.random() < 0.3), isMarked: false, hidden: true})
+//     } 
+//   for (var i = 0; i < 4; i++) {
+//     board.cells.push({row: 2, col: (i), isMine: (Math.random() < 0.3), isMarked: false, hidden: true})
+//     } 
+//   for (var i = 0; i < 4; i++) {
+//     board.cells.push({row: 3, col: (i), isMine: (Math.random() < 0.3), isMarked: false, hidden: true})
+//     } 
+
+//     for (var i = 0; i < board.cells.length; i++) {
+//       board.cells[i].surroundingMines = countSurroundingMines(board.cells[i])
+//     }
+// }
 
 function createBoard () {
   board.cells = []
 
-  for (var i = 0; i < 4; i++) {
-    board.cells.push({row: 0, col: (i), isMine: (Math.random() < 0.5), isMarked: false, hidden: true})
-    } 
-  for (var i = 0; i < 4; i++) {
-    board.cells.push({row: 1, col: (i), isMine: (Math.random() < 0.5), isMarked: false, hidden: true})
-    } 
-  for (var i = 0; i < 4; i++) {
-    board.cells.push({row: 2, col: (i), isMine: (Math.random() < 0.5), isMarked: false, hidden: true})
-    } 
-  for (var i = 0; i < 4; i++) {
-    board.cells.push({row: 3, col: (i), isMine: (Math.random() < 0.5), isMarked: false, hidden: true})
-    } 
+  for (var r = 0; r < 4; r++) {
+    for (var c = 0; c < 4; c++) {
+      board.cells.push({row: (r), col: (c), isMine: (Math.random() < 0.3), isMarked: false, hidden: true})
+      } 
+  }
 
-    for (var i = 0; i < board.cells.length; i++) {
-      board.cells[i].surroundingMines = countSurroundingMines(board.cells[i])
-    }
+  for (var i = 0; i < board.cells.length; i++) {
+    board.cells[i].surroundingMines = countSurroundingMines(board.cells[i])
+  }
 }
+
 
 function startGame () {
   document.addEventListener('click', checkForWin);
